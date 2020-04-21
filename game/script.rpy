@@ -484,6 +484,8 @@ label narrator2:
     $ books= False
     $ trash = False
     $ plant = False
+    $ strangeman = False
+    $ scaryman = False
     if menth >= 6:
         """
         Waking up, you feel a bittersweet sensation in your heart.
@@ -1103,6 +1105,7 @@ label door2:
         play music "traumabgm.ogg" fadein (3)
         $ menth -= 1
         $ trauma += 1
+        $ scaryman = True
         """
         The dark place again.
 
@@ -1154,6 +1157,7 @@ label door2:
         play music "membgm.ogg" fadein (3)
         $ menth += 1
         $ mem += 1
+        $ strangeman = True
         m """
         When we first met
 
@@ -1468,11 +1472,37 @@ label window3:
 
         It's a kind of melancholic sight.
         """
+    if windowseen == False and sofiatalk == True:
+        """
+        It'a late night.
+
+        Outside the window you see darkness and dim lights.
+        """
+        menu:
+            "Watch more carefully.":
+                $ mood += 5
+                $ windowseen = True
+                """
+                The street outside is empty.
+
+                Everything is silent, illuminated by numerous street lights.
+
+                There is a deep beauty in this scenary.
+
+                From your window you can see lots of other apartments.
+
+                The lights behind their windows are on, so you wonder...
+
+                What are all those people doing so late at night?
+                """
+            "Step back.":
+                """
+                Deciding to not watch outside, you step back from the window.
+
+                Around you the night's shadows make the apartment looks empty.
+                """
     if windowseen == True:
-        "Already watched."
-    if sofiatalk == True:
-        $ mood += 5
-        $ windowseen = True
+        "Everything still looks calm."
     jump roomdownscreen3
 label bed3:
     """
@@ -1481,6 +1511,10 @@ label bed3:
     jump roomupscreen3
 label books3:
     if sofiatalk == False:
+        """
+        You're not so much in the mood for reading, now.
+        """
+    if books == False and sofiatalk == True:
         """
         In the night's pale light, the library seems different.
 
@@ -1493,29 +1527,77 @@ label books3:
         Different.
 
         As if melancholy has caught them.
+
+        One title, though, attracts you.
+
+        'No longer human'.
+
+        It seems gloomy, from the cover.
+
+        It sends to you shivers, coming from your deepest memories.
         """
-    if books == True:
-        "Already read."
-    if sofiatalk == True:
-        $ mood += 5
-        $ books = True
+        menu:
+            "Read a passage.":
+                $ mood -= 5
+                $ books = True
+                """
+                You open it and leaf through, searching for something.
+
+                As the pages pass by, you realize there might be something for you, in there.
+
+                Then you find it.
+
+                'The weak fear happiness itself.'
+
+                'They can harm themselves on cotton wool.'
+
+                'Sometimes they are wounded even by happiness.'
+
+                The sensation ends. Now, you feel slightly sadder than before.
+
+                A block has taken form in your heart.
+                """
+            "Put it back.":
+                """
+                The scary sensation the book gives you convinces you to put it back on the shelf.
+
+                As your fingers no longer hold it, you feel better.
+                """
+    if windowseen == True:
+        "Everything still looks calm."
     jump roomdownscreen3
 label plant3:
     if sofiatalk == False:
         """
-        You still wonder which flowers will grow.
-
-        And as you look at the plant, you feel some kind of distant calling.
+        As you look at the plant, you feel some kind of distant calling.
 
         A soft voice that whispers your name, smiling.
 
         Strangely, you turn towards the computer.
         """
+    if plant == False and sofiatalk == True:
+        """
+        The plant seems to be flooded by melancholic waves, just like the entire apartment.
+
+        While watching it, you wonder which flowers will grow.
+
+        Then you realize it needs water.
+        """
+        menu:
+            "Water it.":
+                $ mood += 5
+                $ plant = True
+                """
+                Just as you pour the water in the vase, the plant seems to rejoice instantly.
+
+                It's a nice feeling.
+
+                Calm, and tender.
+                """
+            "Not now...":
+                "You step away, turning back towards the room."
     if plant == True:
-        "Already watered."
-    if sofiatalk == True:
-        $ mood += 5
-        $ plant = True
+        "You're filled with expectations everytime you watch it."
     jump roomdownscreen3
 label trash3:
     if sofiatalk == False:
@@ -1526,11 +1608,25 @@ label trash3:
 
         There's still nothing special about it.
         """
+    if trash == False and sofiatalk == True:
+        """
+        Looks like it keeps filling.
+
+        It's just unbelievable how much trash can pile and pile up.
+        """
+        menu:
+            "Toss everything away.":
+                $ mood += 5
+                $ trash = True
+                "The apartment already looks cleaner, now."
+            "Leave it there, for now.":
+                """
+                Maybe later...
+
+                Or maybe tomorrow, who knows.
+                """
     if trash == True:
-        "Alteady tossed."
-    if sofiatalk == True:
-        $ mood += 5
-        $ trash = True
+        "It's empty."
     jump roomdownscreen3
 label phone3:
     """
@@ -1597,7 +1693,7 @@ label computer3:
 label sofiagood3:
     scene gmood_sneut_ni
     with slowfade
-    s "I see you're doing fine, today!"
+    s "Everytime I see you happy, my heart starts pounding very fast!"
     scene roomd_night
     with slowfade
     $ renpy.pause(1)
@@ -1605,7 +1701,11 @@ label sofiagood3:
 label sofiasad3:
     scene smood_sbad_ni
     with slowfade
-    s "You look so sad..."
+    s """
+    You look very sad...
+
+    Please, hang in there, ok?
+    """
     scene roomd_night
     with slowfade
     $ renpy.pause(1)
@@ -1619,48 +1719,602 @@ label sofianeutmood3:
     $ renpy.pause(1)
     jump roomdownscreen4
 label sofianeut3:
-    scene neutmood_sneut_ni
-    with slowfade
-    $ sofiatalk = True
-    """
-    You calmly sit at your desk.
+    if strangeman == True:
+        scene neutmood_sneut_ni
+        with slowfade
+        $ sofiatalk = True
+        """
+        You calmly sit at your desk.
 
-    The computer is already turned on, as always.
+        The computer is already turned on, as always.
 
-    Sofia is still there.
+        Sofia is still there.
 
-    She hasn't abandoned you and waits smiling, gently.
-    """
-    s "Welcome back again."
-    show black
-    with fadehold
-    stop music fadeout (3)
-    return
+        She hasn't abandoned you and waits smiling, gently.
+        """
+        s """
+        Welcome back again.
 
-    if mood >= 55:
-        jump sofiagoodfade3
-    if mood <= 45:
-        jump sofiasadfade3
+        How did it go, this time?
+        """
+        menu:
+            "I...don't know...":
+                $ mood -= 5
+                s "Did something happen?"
+            "I feel strange.":
+                $ mood += 5
+                s "Well, I'm here for you, so..."
+        s "Do you want to talk about it?"
+        menu:
+            "My memories...":
+                menu:
+                    "I'm scared by them.":
+                        scene smood_sbad_ni
+                        with dissolve
+                        $ mood -= 10
+                        menu:
+                            "I just don't understand.":
+                                $ mood -= 10
+                                s """
+                                I don't think you should be scared...
 
+                                I can only imagine how difficult this all is, but...
+
+                                You know I'm here for you, right?
+
+                                We can work this out...together?
+
+                                You know...I realize it's not easy at all to trust me...
+
+                                I mean, I'm talking with you about all this but after all you don't remember who I am.
+
+                                And it might be strange or shady, to listen to someone that talks to you like this.
+
+                                But please, try to not surrender to the situation!
+
+                                It's easy to do that, when we're alone, but...
+                                """
+                                scene smood_sneut_ni
+                                with dissolve
+                                """
+                                Just resist, ok? And trust your choices.
+
+                                And me, if you can.
+                                """
+                            "What should I do?":
+                                $ mood -= 5
+                                s """
+                                Well...
+
+                                I realize it's not simple at all.
+
+                                But I think you're doing good.
+
+                                I'm afraid I can't tell you much about it, since our relation developed only online, but...
+                                """
+                    "This seems so pointless.":
+                        $ mood -= 10
+                        menu:
+                            "Just...who am I?":
+                                $ mood -= 5
+                                s "Well..."
+                            "Is this all I can do?":
+                                $ mood -= 10
+                                s """
+                                Sincerely...
+
+                                I really don't know, I'm sorry.
+
+                                I think the only thing you can do i trust yourself and your choices.
+
+                                It's the only way you can be free from those images...
+
+                                And, if you want to...
+
+                                You can also trust me.
+
+                                I know it's not easy to trust someone that you don't even remember.
+
+                                Especially in a situation like this.
+
+                                But please, let me help you.
+                                """
+                                scene smood_sneut_ni
+                                with dissolve
+                                """
+                                Oh, I know...!
+                                """
+    if scaryman == True:
+        scene smood_sbad_ni
+        with slowfade
+        s """
+        Hi there...!
+
+        Oh, you are shaking! What happened?
+        """
+        if trauma >= 2:
+            menu:
+                "I saw that man again...":
+                    s "Oh...I guess it wasn't something nice..."
+        if trauma == 1:
+            menu:
+                "There was this man...":
+                    s "A man?"
+        menu:
+            "Tell me, who is he?!":
+                s "I don't know! How could I?"
+        s "Listen, let's try to figure this out together, ok?"
+        menu:
+            "How can you not know?":
+                menu:
+                    "Aren't you my best friend?":
+                        $ mood -= 10
+                        s """
+                        I am, but I don't know everything about you!
+
+                        We...we actually never managed to meet...
+
+                        And we developed our relation only through internet.
+
+                        You never told me many things, and now, of course, you can't do that anymore.
+
+                        Uhmm, I was wandering...
+                        """
+            "Ok, let's try.":
+                scene gmood_sbad_ni
+                with dissolve
+                $ mood += 5
+                s """
+                I know I told you I'm your best friend...
+
+                And it's true!
+
+                But we never managed to talk about many things...
+
+                And never managed to see each other outside of this computer too.
+
+                So there are many things I don't know about you.
+
+                And that's part of why I want to help you.
+
+                I want to get closer to you, to know more about you.
+                """
+        s "I'm really sorry..."
+        menu:
+            "Don't worry, it's ok.":
+                $ mood += 5
+                if mood == 50:
+                    scene neutmood_sneut_ni
+                    with dissolve
+                if mood >= 55:
+                    scene gmood_sneut_ni
+                    with dissolve
+                if mood <= 45:
+                    scene smood_sneut_ni
+                    with dissolve
+                s"""
+                Thanks...
+
+                Oh, now that I think about it...
+                """
+            "Of course you are.":
+                scene smood_sbad_ni
+                with dissolve
+                $ mood -= 10
+                s """
+                Yeah...I am...
+                """
+                scene smood_sneut_ni
+                with dissolve
+                """
+                Well, anyway...
+                """
+    s "What if I tell you what I know about you?"
+        menu:
+        "Uhm sure, why not?":
+            s """
+            Well, you still attend a writing class at university.
+
+            And you're very good at writing, too!
+
+            I read almost everything you wrote, and I love all of your works.
+
+            Even if you haven't published any!
+
+            But it doesn't matter, because I think you'll be able to do it one day.
+
+            And you often talk about what you feel and how you feel about writing.
+
+            I don' do anything special, so I admire a lot what you do.
+
+            And we spent a lot of nights talking about all this.
+
+            Oh and now that I remember...
+
+            You often talk about your professor!
+
+            He seems like a very important person, to you.
+            """
+            if mood == 50:
+                scene neutmood_sbad_ni
+                with dissolve
+            if mood >= 55:
+                scene gmood_sbad_ni
+                with dissolve
+            if mood <= 45:
+                scene smood_sbad_ni
+                with dissolve
+            """
+            We shared all those things, before you lost your memory...
+
+            I hope this will be useful, out there...
+
+            You know, every time I think about us, I feel a little...sad.
+            """
+            if mood == 50:
+                scene neutmood_sgood_ni
+                with dissolve
+            if mood >= 55:
+                scene gmood_sgood_ni
+                with dissolve
+            if mood <= 45:
+                scene smood_sgood_ni
+                with dissolve
+            """
+            But it's ok, I guess.
+
+            As long as I'm helping you I feel fine.
+
+            But, well...
+
+            I think now it's time for you to go, right?
+
+            See you later!
+            """
+            scene roomd_night
+            with slowfade
+            jump roomdownscreen3
+        "I prefer not...":
+            if mood == 50:
+                scene neutmood_sbad_ni
+                with dissolve
+            if mood >= 55:
+                scene gmood_sbad_ni
+                with dissolve
+            if mood <= 45:
+                scene smood_sbad_ni
+                with dissolve
+            s """
+            Oh...
+
+            Yeah, I undestrand...no problem.
+
+            And I guess you should go, now, right?
+
+            See you later.
+            """
+            scene roomd_night
+            with slowfade
+            jump roomdownscreen3
 
 label door3:
     if mood >= 46 and mood <= 54:
         "I can't get outside, it's tightly closed."
         jump roomdownscreen3
-    if mood <= 45:
+    if mood <= 45 and trauma == 0:
+        stop music fadeout (2)
+        scene black
+        with slowfade
+        $ renpy.pause(1.5)
         scene trauma
         with slowfade
+        play music "traumabgm.ogg" fadein (2)
+        $ menth -= 1
         $ trauma += 1
         """
-        trauma
+        You find yourself in a dark place, ruled by sad and heavy feelings.
+
+        A garden, it seems.
+
+        Yet the entire place seems to be falling apart.
+
+        In front of you there is a man. He's looking at you, his eyes glittering in the darkness.
+
+        Suddenly, you feel a stabbing pain hitting you.
+
+        You feel alone, somehow, and that black shadow seem to be connected to that feeling.
+
+        He doesn't talk nor move. He just watches you silently as a strange sense of guilt caughts you.
+
+        And so the memory ends, without a word spoken.
         """
-    elif mood >= 55:
+        stop music fadeout (3)
+        jump narrator4
+    if mood <= 45 and trauma == 1:
+        stop music fadeout (2)
+        scene black
+        with slowfade
+        $ renpy.pause(1.5)
+        scene trauma
+        with slowfade
+        play music "traumabgm.ogg" fadein (3)
+        $ menth -= 1
+        $ trauma += 1
+        """
+        The dark place again.
+
+        It seems different yet similar than last time.
+
+        The strange, scary man is still there.
+
+        He still watches you.
+
+        Between the shadows, you have the impression he's pointing his finger at you.
+        """
+        m """
+        You saw it...
+
+        The fall of everything...
+
+        You saw it...
+
+        Didn't you?
+        """
+        """
+        You don't understand what he's saying.
+
+        You don't understand at all.
+
+        What 'fall' is he talking about?
+
+        What does it mean you saw it?
+
+        You try to remember.
+
+        Hard. Harder.
+
+        But nothing comes to your mind.
+
+        Absolutely nothing.
+
+        And the memory starts to disappear.
+        """
+        stop music fadeout (3)
+        jump narrator4
+    if mood <= 45 and trauma == 2:
+        stop music fadeout (2)
+        scene black
+        with slowfade
+        $ renpy.pause(1.5)
+        scene trauma
+        with slowfade
+        play music "traumabgm.ogg" fadein (3)
+        $ menth -= 1
+        $ trauma += 1
+        """
+        On the other side of the door, the man is standing still.
+
+        He watches you, silently.
+
+        You're afraid, yet you feel a desire to get closer to him.
+
+        Maybe to understand who he is?
+        """
+        menu:
+            "Just...what do you want from me?":
+                """
+                He does not answer.
+
+                He's waiting for something, and he continues to look at you.
+
+                Only after some time, he starts talking.
+                """
+            "What have I done to you?":
+                """
+                He's still silent.
+
+                The eerie sensation you're feeling keeps on intensifying.
+
+                You'd like to go away.
+
+                To escape from this place.
+
+                But there is no way out.
+                """
+        m """
+        I was...abandoned.
+
+        Completely...
+
+        Lonely.
+
+        And you stood there.
+
+        Watching
+
+        You didn't do anything...
+
+        To help me.
+
+        You abandoned me.
+        """
+        menu:
+            "I can't remember...":
+                m """
+                You...
+
+                ...can't...
+
+                ...remember?
+                """
+                """
+                He stops for some seconds.
+
+                As if he's thinking about something.
+
+                He seems...
+
+                Disappointed?
+                """
+            "What...abandoned you...?":
+                m """
+                You were the most important.
+
+                The only one.
+
+                The best one among them all.
+
+                Yet...
+
+                You...
+
+                Turned your back towards me.
+                """
+        m """
+        You may not remember.
+
+        But soon...
+
+        You'll be able to.
+
+        And what you've done...
+
+        Will be revealed.
+        """
+        """
+        Shivers of fear run through your spine.
+
+        His eyes are the last thing you see, as the scene starts to...
+        """
+        stop music fadeout (2)
+        scene black
+        with slowfade
+        """
+        Fade away.
+        """
+        jump narrator4
+    if mood >= 55 and mem == 0:
+        stop music fadeout (2)
+        scene black
+        with slowfade
+        $ renpy.pause(1.5)
         scene mem
         with slowfade
+        play music "membgm.ogg" fadein (2)
+        $ menth += 1
         $ mem += 1
         """
-        memory
+        There is a small and feeble garden ahead of you.
+
+        A big tree casts his leaves towards the sky and all the colours are pale, as if you're in a dream.
+
+        The wind blows softly, caressing your skin. It's a cold breeze, yet tender.
+
+        In the middle of the garden there is a man, sitted on an old chair.
+
+        He gives you his back, so you can't see his face, yet it reminds you of something.
+
+        A memory that you thought was gone is silently appearing in front of you as a pale shadow,
+
+        You don't know how, but you understand he's smiling even though you can't see it.
+
+        He doesn't talk and not even move, yet there is a deep feeling of calmness that comes with the memory's end.
         """
+        stop music fadeout (3)
+        jump narrator4
+    elif mood >= 55 and mem == 1:
+        stop music fadeout (2)
+        scene black
+        with slowfade
+        $ renpy.pause(1.5)
+        scene mem
+        with slowfade
+        play music "membgm.ogg" fadein (3)
+        $ menth += 1
+        $ mem += 1
+        m """
+        When we first met
+
+        Our hands were cold
+
+        The wind blew gently on the forest
+
+        Silence, all around
+
+        And a smile of happiness on my face.
+        """
+        """
+        You look at the mysterious man in front of you.
+
+        He just finished reading a passage from the book he's holding.
+        """
+        m """
+        Do you remember this poem?
+
+        It brings back so many memories...
+
+        Yet, you don't seem to recall any of them...
+
+        That makes me sad.
+
+        So sad...
+        """
+        menu:
+            "This place...":
+                m """
+                It rings some bell?
+
+                It does, right?
+
+                But I guess you still aren't ready.
+
+                Memories can't come back in a second, you know?
+
+                Take it easy, rest some more...
+
+                We'll see each other again soon.
+                """
+            "Who are you...?":
+                m """
+                A friend.
+
+                An old friend that you can't seem to let go...
+
+                And it's so sad, all this.
+
+                Losing every memory of me...
+
+                And yet, not being able to completely forget.
+                """
+        """
+        You feel a tear falling slowly.
+
+        Its warmth melts the ice that has frozen your heart.
+
+        It's strange, but you feel as if an image is appearing in your mind.
+
+        But it's still faded, as the scene that slowly disappears.
+        """
+    if mood >= 55 and mem == 2:
+        stop music fadeout (2)
+        scene black
+        with slowfade
+        $ renpy.pause(1.5)
+        scene mem
+        with slowfade
+        play music "membgm.ogg" fadein (2)
+        $ menth += 1
+        $ mem += 1
+        """
+        You're in the garden.
+
+        In front of you, the strange man is reading, again.
+        """
+        m """
+        aaa
+        """
+        stop music fadeout (3)
+        jump narrator4
 
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################START PASSAGE 4 #####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
 
@@ -1720,7 +2374,7 @@ label roomdown4:
         with fade
         $ renpy.pause(1)
         jump roomdownscreen4
-label roomdownscreen3:
+label roomdownscreen4:
     if ghost == True:
         scene roomd_ghosts
         call screen roomdownscreen4g
@@ -1728,7 +2382,7 @@ label roomdownscreen3:
         scene roomd_ev
         call screen roomdownscreen4
 
-label roomup3:
+label roomup4:
     if ghost == True:
         scene roomd_ghosts
         $ renpy.pause(0.5)

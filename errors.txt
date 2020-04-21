@@ -3,12 +3,12 @@ errors listed below, and try again.
 
 
 The label roomdownscreen3 is defined twice, at
-  File "game/script.rpy", line 1447 and
-  File "game/script.rpy", line 1723.
+  File "game/script.rpy", line 1451 and
+  File "game/script.rpy", line 1892.
 
 The label roomup3 is defined twice, at
-  File "game/script.rpy", line 1451 and
-  File "game/script.rpy", line 1731.
+  File "game/script.rpy", line 1455 and
+  File "game/script.rpy", line 1900.
 
-Ren'Py Version: Ren'Py 7.2.2.491
-Sun Apr 05 19:52:01 2020
+Ren'Py Version: Ren'Py 7.3.5.606
+Fri Apr 17 18:01:49 2020
