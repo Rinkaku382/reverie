@@ -3,11 +3,10 @@ define slowerfade = Fade (3.0, 0, 3.0)
 define slowdissolve = Dissolve(1.0)
 define fadehold = Fade(3.0, 1.0, 3.0)
 
-define y = Character("You")
-define n = Character("Narrator")
-define s = Character("Sofia")
-define ug = Character("Unknown Girl")
-define m = Character("Strange Man")
+define s = Character("Sofia", color="#C69AF9")
+define ug = Character("Unknown Girl", color="#C69AF9")
+define stm = Character("Strange Man", color="#7BC2F4")
+define scm = Character("Scary Man", color="#ED5259")
 
 
 label start:
@@ -227,12 +226,12 @@ label sofianeut:
             $ mood -= 5
             with dissolve
             ug "A stranger? Well, I'm not a stranger, I'm Sofia...your best friend!"
-    s "I'm here to help you."
-    y "Help?"
-    s "Yes, of course. We know each other very well, but you've lost your memory, so..."
-    y "Yeah, I don't remember..."
     s """
-    Don't worry.
+    I'm here to help you.
+
+    We know each other very well, but you've lost your memory, so...
+
+    But don't worry.
 
     Like I said, I'm here to help.
 
@@ -381,7 +380,7 @@ label sofianeut:
                 scene roomd_dawn
                 with slowfade
                 jump roomdownscreen
-            if mood == 40:
+            if mood <= 40:
                 scene smood_sbad_dawn
                 s "Ok, it's fine..."
                 scene roomd_dawn
@@ -1117,7 +1116,7 @@ label door2:
 
         Between the shadows, you have the impression he's pointing his finger at you.
         """
-        m """
+        scm """
         You saw it...
 
         The fall of everything...
@@ -1158,7 +1157,7 @@ label door2:
         $ menth += 1
         $ mem += 1
         $ strangeman = True
-        m """
+        stm """
         When we first met
 
         Our hands were cold
@@ -1174,7 +1173,7 @@ label door2:
 
         He just finished reading a passage from the book he's holding.
         """
-        m """
+        stm """
         Do you remember this poem?
 
         It brings back so many memories...
@@ -1187,7 +1186,7 @@ label door2:
         """
         menu:
             "This place...":
-                m """
+                stm """
                 It rings some bell?
 
                 It does, right?
@@ -1201,7 +1200,7 @@ label door2:
                 We'll see each other again soon.
                 """
             "Who are you...?":
-                m """
+                stm """
                 A friend.
 
                 An old friend that you seem to can't let go...
@@ -1372,12 +1371,12 @@ label narrator3:
     scene roomd_night
     with fadehold
     $ mood = 50
-    $ menthealth = 0
     $ sofiatalk = False
     $ windowseen = False
     $ books = False
     $ trash = False
     $ plant = False
+    $ letter = False
     if menth >= 6:
         scene roomd_night
         with fadehold
@@ -1910,7 +1909,7 @@ label sofianeut3:
                 Well, anyway...
                 """
     s "What if I tell you what I know about you?"
-        menu:
+    menu:
         "Uhm sure, why not?":
             s """
             Well, you still attend a writing class at university.
@@ -2051,7 +2050,7 @@ label door3:
 
         Between the shadows, you have the impression he's pointing his finger at you.
         """
-        m """
+        scm """
         You saw it...
 
         The fall of everything...
@@ -2121,7 +2120,7 @@ label door3:
 
                 But there is no way out.
                 """
-        m """
+        scm """
         I was...abandoned.
 
         Completely...
@@ -2140,7 +2139,7 @@ label door3:
         """
         menu:
             "I can't remember...":
-                m """
+                scm """
                 You...
 
                 ...can't...
@@ -2157,7 +2156,7 @@ label door3:
                 Disappointed?
                 """
             "What...abandoned you...?":
-                m """
+                scm """
                 You were the most important.
 
                 The only one.
@@ -2170,7 +2169,7 @@ label door3:
 
                 Turned your back towards me.
                 """
-        m """
+        scm """
         You may not remember.
 
         But soon...
@@ -2248,7 +2247,7 @@ label door3:
 
         He just finished reading a passage from the book he's holding.
         """
-        m """
+        stm """
         Do you remember this poem?
 
         It brings back so many memories...
@@ -2261,7 +2260,7 @@ label door3:
         """
         menu:
             "This place...":
-                m """
+                stm """
                 It rings some bell?
 
                 It does, right?
@@ -2275,7 +2274,7 @@ label door3:
                 We'll see each other again soon.
                 """
             "Who are you...?":
-                m """
+                stm """
                 A friend.
 
                 An old friend that you can't seem to let go...
@@ -2310,9 +2309,64 @@ label door3:
 
         In front of you, the strange man is reading, again.
         """
-        m """
-        aaa
+        stm """
+        I remember...
+
+        Some time ago.
+
+        Maybe a year, I think.
+
+        When I finished talking, and all the student started to gather their things to go away...
+
+        You came to me, curious about everything I said during the lesson.
+
+        Normally, students just pass by.
+
+        They don't really stay forever.
+
+        But that day I felt...something different.
+
+        I felt as if...somehow, you would have stayed.
+
+        Guess I wasn't right at all...
         """
+        menu:
+            "What do you mean?":
+                stm """
+                That you didn't stayed.
+
+                But...I can understand that.
+
+                It's not so simple, to stay in contact with someone.
+
+                Too bad it all happened that time...
+                """
+        menu:
+            "That time?":
+                $ letter == True
+                stm """
+                Yes, a difficult one.
+
+                For me, at least.
+
+                But I can't tell you much about it.
+
+                Every game has a precise rule, and the rule of this game is that you retrieve your memories by yourself.
+
+                Still, that doesn't forbids me from giving you a hint.
+
+                Look carefully into your library.
+
+                Long time ago, I sent you a letter.
+
+                It'a hidden in a book I gave you. A book about dreams.
+
+                Now...goodbye.
+
+                I'm sorry I didn't give you many choices, this time.
+
+                But I'll manage to do better the next time we see each other, ok?
+                """
         stop music fadeout (3)
         jump narrator4
 
@@ -2322,41 +2376,67 @@ label narrator4:
     show black
     with fadehold
     """
-    a
+    And here you are, again.
+
+    What was, this time?
+
+    A comfortable memory?
+
+    A scary trauma?
+
+    I wonder...
+
+    But whatever it is, they both bring leftovers with them, in any case.
+
+    But anyway, that does not matter.
+
+    It will matter only when you'll get back to your room.
+
+    I was thinking about something.
+
+    Have you ever wondered what divides fear and serenity?
+
+    Don't worry, I know it's not a simple question.
+
+    So, I'll not wait for your answer.
+
+    But you can answer to this...
+
+    Have you felt safe, until now?
+    """
+    menu:
+        "Yes.":
+            """
+            Interesting.
+
+            I'm sorry if my questions may seem strange, to you.
+
+            I ask you these questions because I want to know about your experience until this moment.
+            """
+        "No.":
+            """
+            We never feel truly safe, right?
+
+            Or maybe we do, but we don't realize it.
+            """
+    """
+    Yet, your answer really tells me something about you.
+
+    And I guess that now it's time to go back to the room...
     """
     play music "roombgm.ogg" fadein (3)
-    scene roomd_night
+    scene roomd_ghosts
     with fadehold
     $ mood = 45
-    $ menthealth = 0
+    $ menth = 5
     $ sofiatalk = False
     $ windowseen = False
     $ books = False
     $ trash = False
     $ plant = False
+    $ bed = False
+    $ truth = False
     $ ghost = True
-    if menth >= 7:
-        scene roomd_ghosts
-        with fadehold
-        """
-        a
-        """
-    if menth == 3:
-        scene roomd_ghosts
-        with fadehold
-        """
-        a
-        """
-        """
-        a
-        """
-        jump pass4ghosts
-    if menth >= 4 and menth <= 6:
-        scene roomd_ghosts
-        with fadehold
-        """
-        a
-        """
     jump roomdownscreen4
 
 label roomdown4:
@@ -2408,21 +2488,59 @@ label roomupscreen4:
 label window4:
     if sofiatalk == False:
         """
-        From the window you can see the stars.
-
-        They shine through the dark and calm sky.
-
-        It's a kind of melancholic sight.
+        Everything is dark outside.
+        """
+    if windowseen == True:
+        """
+        The scenery hasn't changed.
         """
     if sofiatalk == True and ghost == True:
-        $ mood -= 5
-        $ windowseen = True
+        """
+        From the window, everything is immersed in dark shadows.
+
+        You feel attracted by that darkness, even if you feel it's dangerous.
+
+        It makes your body shiver.
+        """
+        menu:
+            "Look outside.":
+                $ mood -= 5
+                $ windowseen = True
+                """
+                As you look outside, the shivers infensify.
+
+                You feel worst than before.
+
+                As if the darkness that covers everything outside has penetrated your heart.
+                """
+            "Step back.":
+                """
+                Stepping back from it the bad feeling you had softly disappears.
+                """
     if sofiatalk == True and ghost == False:
-        $ mood += 5
-        $ windowseen = True
+        """
+        It looks like a simple and solitary evening.
+
+        Soft colours come from the window.
+        """
+        menu:
+            "Look outside.":
+                $ mood += 5
+                $ windowseen = True
+                """
+                Few people's shadows on the street.
+
+                Wind is blowing through the trees, which slowly dance.
+
+                It's so peaceful...
+                """
+            "Step back.":
+                """
+                You turn away, looking at the room and thinking about what to do.
+                """
     jump roomdownscreen4
 label bed4:
-    if sofiatalk == False:
+    if sofiatalk == False or bed == True:
         """
         You just woke up, so you're not tired.
         """
@@ -2434,33 +2552,198 @@ label bed4:
         menu:
             "Yes.":
                 $ ghost = False
+                $ bed = True
                 $ mood -= 10
                 scene roomu_ev
                 "Everything seems fine, now."
             "No.":
-                "You're ok as you are."
+                "You bravely step away."
         jump roomupscreen4
 label books4:
     if sofiatalk == False:
         """
-        In the night's pale light, the library seems different.
-
-        It's a strange sensation, but it's as if everything in it has become more sad than before.
-
-        All the books' titles...
-
-        You still can't recognize many of them but the words have become...
-
-        Different.
-
-        As if melancholy has caught them.
+        From the library come an ominous feeling.
         """
+    if books == True:
+        "You've already read enough."
     if sofiatalk == True and ghost == True:
-        $ mood -= 5
-        $ books = True
+        """
+        Even though you feel bad, looking at the library...
+
+        There is a book that caughts your attention.
+
+        Do you read it?
+        """
+        menu:
+            "I do.":
+                $ mood -= 5
+                $ books = True
+                if letter == False:
+                    """
+                    You grab the book, which title is impossible to be read.
+
+                    An old collection of poems.
+
+                    You decide to read the first one.
+
+                    'Solitary smiles.'
+
+                    'Lonely souls.'
+
+                    'This is everything you can see.'
+
+                    'A perfect reflection'
+
+                    'Of yourself.'
+                    """
+                if letter == True:
+                    $ truth == True
+                    """
+                    The words of the man in your memories come to your mind.
+
+                    A book about dreams.
+
+                    And there it is, next to the one you intended to take.
+
+                    It's simply titled 'Dreams'.
+
+                    A collection of short stories, it seems.
+
+                    You open it and find the letter. It's darkened by time.
+
+                    Or maybe it seems dark because of the atmosphere in the room.
+
+                    It's already opened, so you start reading it.
+                    """
+                    stm """
+                    My dear friend...
+
+                    It seems this is my last gift for you.
+
+                    My favourite student.
+
+                    I wonder, how many words won't be exchanged ever again, in that garden?
+
+                    It lasted only for few years.
+
+                    Yet, it was so peaceful that I completely lost myself in it.
+
+                    We were both alone. Bot in search of a companion soul.
+
+                    Me and you.
+
+                    But we know it can't continue, right?
+
+                    It seems I made some mistakes. And you don't trust me anymore.
+
+                    But I understand. It's not simple at all, for you.
+
+                    I hope we'll see each other again, one day.
+
+                    Now, I'll simply go, far away from here. From the memories this place holds for me.
+
+                    But please, don't feel guilty for stepping away from me.
+
+                    If you will, the memories and remorse will be inescapable.
+
+                    Walk the right path.
+
+                    Don't fall into your feeling's trap.
+
+                    With love...your old professor, Andrei.
+                    """
+            "I don't.":
+                """
+                You turn away, looking at the room and thinking about what to do.
+                """
     if sofiatalk == True and ghost == False:
-        $ mood += 5
-        $ books = True
+        """
+        You look at the library, finding an interesting book.
+
+        Do you read it?
+        """
+        menu:
+            "I do.":
+                if letter == False:
+                    $ mood += 5
+                    $ books = True
+                    """
+                    You grab the book, which title is impossible to be read.
+
+                    An old collection of poems.
+
+                    You decide to read the third one.
+
+                    'The expression on my grandfather's face.'
+
+                    'The pale shadows of those gone before him.'
+
+                    'And those who'll be gone after him.'
+
+                    'They are all beside me.'
+
+                    ''
+                    """
+                if letter == True:
+                    $ truth == True
+                    """
+                    The words of the man in your memories come to your mind.
+
+                    A book about dreams.
+
+                    And there it is, next to the one you intended to take.
+
+                    It's simply titled 'Dreams'.
+
+                    A collection of short stories, it seems.
+
+                    You open it and find the letter. It's darkened by time.
+
+                    Or maybe it seems dark because of the atmosphere in the room.
+
+                    It's already opened, so you start reading it.
+                    """
+                    stm """
+                    My dear friend...
+
+                    It seems this is my last gift for you.
+
+                    My favourite student.
+
+                    I wonder, how many words won't be exchanged ever again, in that garden?
+
+                    It lasted only for few years.
+
+                    Yet, it was so peaceful that I completely lost myself in it.
+
+                    We were both alone. Bot in search of a companion soul.
+
+                    Me and you.
+
+                    But we know it can't continue, right?
+
+                    It seems I made some mistakes. And you don't trust me anymore.
+
+                    But I understand. It's not simple at all, for you.
+
+                    I hope we'll see each other again, one day.
+
+                    Now, I'll simply go, far away from here. From the memories this place holds for me.
+
+                    But please, don't feel guilty for stepping away from me.
+
+                    If you will, the memories and remorse will be inescapable.
+
+                    Walk the right path.
+
+                    Don't fall into your feeling's trap.
+
+                    With love...your old professor, Andrei.
+                    """
+            "I don't.":
+                """
+                You turn away, looking at the room and thinking about what to do.
+                """
     jump roomdownscreen4
 label plant4:
     if sofiatalk == False:
@@ -2653,7 +2936,721 @@ label door4:
         """
         memory
         """
+    jump narrator5
 
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################START PASSAGE 5 #####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+label narrator5:
+    show black
+    with fadehold
+    """
+    aaa
+    """
+    play music "roombgm.ogg" fadein (3)
+    scene
+    with fadehold
+    $ mood = 45
+    $ sofiatalk = False
+    $ windowseen = False
+    $ books = False
+    $ trash = False
+    $ plant = False
+    $ ghost = True
+    if menth >= 6:
+        scene roomd_
+        with fadehold
+        """
+        aaa
+        """
+    if menth <= 4:
+        scene roomd_ghosts
+        with fadehold
+        """
+        a
+        """
+    jump roomdownscreen5
+
+label roomdown5:
+    if ghost == True:
+        scene roomu_ghosts
+        $ renpy.pause(0.5)
+        scene roomd_ghosts
+        with fade
+        $ renpy.pause(1)
+        jump roomdownscreen5g
+    if ghost == False:
+        scene roomu_ev
+        $ renpy.pause(0.5)
+        scene roomd_ev
+        with fade
+        $ renpy.pause(1)
+        jump roomdownscreen5
+label roomdownscreen5:
+    if ghost == True:
+        scene roomd_ghosts
+        call screen roomdownscreen5g
+    if ghost == False:
+        scene roomd_ev
+        call screen roomdownscreen5
+
+label roomup5:
+    if ghost == True:
+        scene roomd_ghosts
+        $ renpy.pause(0.5)
+        scene roomu_ghosts
+        with fade
+        $ renpy.pause(1)
+        jump roomupscreen5g
+    if ghost == False:
+        scene roomd_ev
+        $ renpy.pause(0.5)
+        scene roomu_ev
+        with fade
+        $ renpy.pause(1)
+        jump roomupscreen5
+label roomupscreen5:
+    if ghost == True:
+        scene roomu_ghosts
+        call screen roomupscreen5g
+    if ghost == False:
+        scene roomu_ev
+        call screen roomupscreen5
+
+label window5:
+    if sofiatalk == False:
+        """
+        From the window you can see the stars.
+
+        They shine through the dark and calm sky.
+
+        It's a kind of melancholic sight.
+        """
+    if sofiatalk == True and ghost == True:
+        $ mood -= 5
+        $ windowseen = True
+        jump roomdownscreen5g
+    if sofiatalk == True and ghost == False:
+        $ mood += 5
+        $ windowseen = True
+        jump roomdownscreen5
+label bed5:
+    if sofiatalk == False:
+        """
+        You just woke up, so you're not tired.
+        """
+        jump roomupscreen5
+    if sofiatalk == True:
+        """
+        Do you want to sleep?
+        """
+        menu:
+            "Yes.":
+                $ ghost = False
+                $ mood -= 10
+                scene roomu_ev
+                "Everything seems fine, now."
+            "No.":
+                "You're ok as you are."
+        jump roomupscreen5
+label books5:
+    if sofiatalk == False:
+        """
+        In the night's pale light, the library seems different.
+
+        It's a strange sensation, but it's as if everything in it has become more sad than before.
+
+        All the books' titles...
+
+        You still can't recognize many of them but the words have become...
+
+        Different.
+
+        As if melancholy has caught them.
+        """
+    if sofiatalk == True and ghost == True:
+        $ mood -= 5
+        $ books = True
+        jump roomdownscreen5g
+    if sofiatalk == True and ghost == False:
+        $ mood += 5
+        $ books = True
+        jump roomdownscreen5
+label plant5:
+    if sofiatalk == False:
+        """
+        You still wonder which flowers will grow.
+
+        And as you look at the plant, you feel some kind of distant calling.
+
+        A soft voice that whispers your name, smiling.
+
+        Strangely, you turn towards the computer.
+        """
+    if sofiatalk == True and ghost == True:
+        $ mood -= 5
+        $ plant = True
+        jump roomdownscreen5g
+    if sofiatalk == True and ghost == False:
+        $ mood += 5
+        $ plant = True
+        jump roomdownscreen5
+label trash5:
+    if sofiatalk == False:
+        """
+        Just a normal trash bin.
+
+        Even though everything looks sadder...
+
+        There's still nothing special about it.
+        """
+    if sofiatalk == True and ghost == True:
+        $ mood -= 5
+        $ trash = True
+        jump roomdownscreen5g
+    if sofiatalk == True and ghost == False:
+        $ mood += 5
+        $ trash = True
+        jump roomdownscreen5
+label phone5:
+    if ghost == True:
+        """
+        Maybe you could call someone...
+
+        But there really isn't anyone to call.
+        """
+        jump roomdownscreen5g
+    if ghost == False:
+        """
+        aaa
+        """
+        jump roomdownscreen5
+label tv5:
+    if ghost == True:
+        """
+        Maybe you could call someone...
+
+        But there really isn't anyone to call.
+        """
+        jump roomdownscreen5g
+    if ghost == False:
+        """
+        aaa
+        """
+        jump roomdownscreen5
+label cds5:
+    if ghost == True:
+        """
+        Maybe you could call someone...
+
+        But there really isn't anyone to call.
+        """
+        jump roomdownscreen5g
+    if ghost == False:
+        """
+        aaa
+        """
+        jump roomdownscreen5
+label toy5:
+    if ghost == True:
+        """
+        Maybe you could call someone...
+
+        But there really isn't anyone to call.
+        """
+        jump roomupscreen5g
+    if ghost == False:
+        """
+        aaa
+        """
+        jump roomupscreen5
+label mirror5:
+    if ghost == True:
+        """
+        Maybe you could call someone...
+
+        But there really isn't anyone to call.
+        """
+        jump roomupscreen5g
+    if ghost == False:
+        """
+        aaa
+        """
+        jump roomupscreen5
+label guit5:
+    if ghost == True:
+        """
+        Maybe you could call someone...
+
+        But there really isn't anyone to call.
+        """
+        jump roomupscreen5g
+    if ghost == False:
+        """
+        aaa
+        """
+        jump roomupscreen5
+
+label computer5:
+    if sofiatalk == False:
+        jump sofianeut5
+    if sofiatalk == True and mood >= 55:
+        jump sofiagood5
+    if sofiatalk == True and mood <= 45:
+        jump sofiasad5
+    if sofiatalk == True and mood == 50:
+        jump sofianeutmood5
+label sofiagood5:
+    if ghost == True:
+        scene gmood_sbad_gh
+        with slowfade
+        s "I see you're doing fine, today!"
+        scene roomd_ghosts
+        with slowfade
+        $ renpy.pause(1)
+        jump roomdownscreen5
+    if ghost == False:
+        scene gmood_sgood_ev
+        with slowfade
+        s "a"
+        scene roomd_ev
+        with slowfade
+        $ renpy.pause(1)
+        jump roomdownscreen5
+label sofiasad5:
+    if ghost == True:
+        scene smood_sbad_gh
+        with slowfade
+        s "I see you're doing fine, today!"
+        scene roomd_ghosts
+        with slowfade
+        $ renpy.pause(1)
+        jump roomdownscreen5
+    if ghost == False:
+        scene smood_sbad_ev
+        with slowfade
+        s "a"
+        scene roomd_ev
+        with slowfade
+        $ renpy.pause(1)
+        jump roomdownscreen5
+label sofianeutmood5:
+    if ghost == True:
+        scene neutmood_sbad_gh
+        with slowfade
+        s "I see you're doing fine, today!"
+        scene roomd_ghosts
+        with slowfade
+        $ renpy.pause(1)
+        jump roomdownscreen5
+    if ghost == False:
+        scene neutmood_sneut_ev
+        with slowfade
+        s "a"
+        scene roomd_ev
+        with slowfade
+        $ renpy.pause(1)
+        jump roomdownscreen5
+label sofianeut5:
+    scene smood_sbad_gh
+    with slowfade
+    $ sofiatalk = True
+    """
+    You calmly sit at your desk.
+
+    The computer is already turned on, as always.
+
+    Sofia is still there.
+
+    She hasn't abandoned you and waits smiling, gently.
+    """
+    s ""
+    if mood >= 55:
+        scene roomd_ghosts
+        with slowfade
+        $ renpy.pause(1)
+        jump roomdownscreen5
+    if mood <= 45:
+        scene roomd_ghosts
+        with slowfade
+        $ renpy.pause(1)
+        jump roomdownscreen5
+
+
+label door5:
+    if mood >= 29 and mood <= 69:
+        "I can't get outside, it's tightly closed."
+        jump roomdownscreen4
+    if mood <= 30:
+        scene trauma
+        with slowfade
+        $ trauma += 1
+        """
+        trauma
+        """
+    elif mood >= 70:
+        scene mem
+        with slowfade
+        $ mem += 1
+        """
+        memory
+        """
+    jump narrator6
+
+####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################START PASSAGE 6 #####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+
+label narrator6:
+    show black
+    with fadehold
+    """
+    aaa
+    """
+    play music "roombgm.ogg" fadein (3)
+    scene
+    with fadehold
+    $ mood = 45
+    $ sofiatalk = False
+    $ windowseen = False
+    $ books = False
+    $ trash = False
+    $ plant = False
+    $ ghost = True
+    if menth >= 6:
+        scene roomd_
+        with fadehold
+        """
+        aaa
+        """
+    if menth <= 4:
+        scene roomd_ghosts
+        with fadehold
+        """
+        aaa
+        """
+    jump roomdownscreen6
+
+label roomdown6:
+    if ghost == True:
+        scene roomu_ghosts
+        $ renpy.pause(0.5)
+        scene roomd_ghosts
+        with fade
+        $ renpy.pause(1)
+        jump roomdownscreen6g
+    if ghost == False:
+        scene roomu_ev
+        $ renpy.pause(0.5)
+        scene roomd_ev
+        with fade
+        $ renpy.pause(1)
+        jump roomdownscreen6
+label roomdownscreen6:
+    if ghost == True:
+        scene roomd_ghosts
+        call screen roomdownscreen6g
+    if ghost == False:
+        scene roomd_ev
+        call screen roomdownscreen6
+
+label roomup6:
+    if ghost == True:
+        scene roomd_ghosts
+        $ renpy.pause(0.5)
+        scene roomu_ghosts
+        with fade
+        $ renpy.pause(1)
+        jump roomupscreen6g
+    if ghost == False:
+        scene roomd_ev
+        $ renpy.pause(0.5)
+        scene roomu_ev
+        with fade
+        $ renpy.pause(1)
+        jump roomupscreen6
+label roomupscreen6:
+    if ghost == True:
+        scene roomu_ghosts
+        call screen roomupscreen6g
+    if ghost == False:
+        scene roomu_ev
+        call screen roomupscreen6
+
+label window6:
+    if sofiatalk == False:
+        """
+        From the window you can see the stars.
+
+        They shine through the dark and calm sky.
+
+        It's a kind of melancholic sight.
+        """
+    if sofiatalk == True and ghost == True:
+        $ mood -= 5
+        $ windowseen = True
+        jump roomdownscreen6g
+    if sofiatalk == True and ghost == False:
+        $ mood += 5
+        $ windowseen = True
+        jump roomdownscreen6
+label bed6:
+    if sofiatalk == False:
+        """
+        You just woke up, so you're not tired.
+        """
+        jump roomupscreen6
+    if sofiatalk == True:
+        """
+        Do you want to sleep?
+        """
+        menu:
+            "Yes.":
+                $ ghost = False
+                $ mood -= 10
+                scene roomu_ev
+                "Everything seems fine, now."
+            "No.":
+                "You're ok as you are."
+        jump roomupscreen6
+label books6:
+    if sofiatalk == False:
+        """
+        In the night's pale light, the library seems different.
+
+        It's a strange sensation, but it's as if everything in it has become more sad than before.
+
+        All the books' titles...
+
+        You still can't recognize many of them but the words have become...
+
+        Different.
+
+        As if melancholy has caught them.
+        """
+    if sofiatalk == True and ghost == True:
+        $ mood -= 5
+        $ books = True
+        jump roomdownscreen6g
+    if sofiatalk == True and ghost == False:
+        $ mood += 5
+        $ books = True
+        jump roomdownscreen6
+label plant6:
+    if sofiatalk == False:
+        """
+        You still wonder which flowers will grow.
+
+        And as you look at the plant, you feel some kind of distant calling.
+
+        A soft voice that whispers your name, smiling.
+
+        Strangely, you turn towards the computer.
+        """
+    if sofiatalk == True and ghost == True:
+        $ mood -= 5
+        $ plant = True
+        jump roomdownscreen6g
+    if sofiatalk == True and ghost == False:
+        $ mood += 5
+        $ plant = True
+        jump roomdownscreen6
+label trash6:
+    if sofiatalk == False:
+        """
+        Just a normal trash bin.
+
+        Even though everything looks sadder...
+
+        There's still nothing special about it.
+        """
+    if sofiatalk == True and ghost == True:
+        $ mood -= 5
+        $ trash = True
+        jump roomdownscreen6g
+    if sofiatalk == True and ghost == False:
+        $ mood += 5
+        $ trash = True
+        jump roomdownscreen6
+label phone6:
+    if ghost == True:
+        """
+        Maybe you could call someone...
+
+        But there really isn't anyone to call.
+        """
+        jump roomdownscreen6g
+    if ghost == False:
+        """
+        aaa
+        """
+        jump roomdownscreen6
+label tv6:
+    if ghost == True:
+        """
+        Maybe you could call someone...
+
+        But there really isn't anyone to call.
+        """
+        jump roomdownscreen6g
+    if ghost == False:
+        """
+        aaa
+        """
+        jump roomdownscreen6
+label cds6:
+    if ghost == True:
+        """
+        Maybe you could call someone...
+
+        But there really isn't anyone to call.
+        """
+        jump roomdownscreen6g
+    if ghost == False:
+        """
+        aaa
+        """
+        jump roomdownscreen6
+label toy6:
+    if ghost == True:
+        """
+        Maybe you could call someone...
+
+        But there really isn't anyone to call.
+        """
+        jump roomupscreen6g
+    if ghost == False:
+        """
+        aaa
+        """
+        jump roomupscreen6
+label mirror6:
+    if ghost == True:
+        """
+        Maybe you could call someone...
+
+        But there really isn't anyone to call.
+        """
+        jump roomupscreen6g
+    if ghost == False:
+        """
+        aaa
+        """
+        jump roomupscreen6
+label guit6:
+    if ghost == True:
+        """
+        Maybe you could call someone...
+
+        But there really isn't anyone to call.
+        """
+        jump roomupscreen6g
+    if ghost == False:
+        """
+        aaa
+        """
+        jump roomupscreen6
+
+label computer6:
+    if sofiatalk == False:
+        jump sofianeut6
+    if sofiatalk == True and mood >= 55:
+        jump sofiagood6
+    if sofiatalk == True and mood <= 45:
+        jump sofiasad6
+    if sofiatalk == True and mood == 50:
+        jump sofianeutmood6
+label sofiagood6:
+    if ghost == True:
+        scene gmood_sbad_gh
+        with slowfade
+        s "I see you're doing fine, today!"
+        scene roomd_ghosts
+        with slowfade
+        $ renpy.pause(1)
+        jump roomdownscreen6g
+    if ghost == False:
+        scene gmood_sgood_ev
+        with slowfade
+        s "a"
+        scene roomd_ev
+        with slowfade
+        $ renpy.pause(1)
+        jump roomdownscreen6
+label sofiasad6:
+    if ghost == True:
+        scene smood_sbad_gh
+        with slowfade
+        s "I see you're doing fine, today!"
+        scene roomd_ghosts
+        with slowfade
+        $ renpy.pause(1)
+        jump roomdownscreen6
+    if ghost == False:
+        scene smood_sbad_ev
+        with slowfade
+        s "a"
+        scene roomd_ev
+        with slowfade
+        $ renpy.pause(1)
+        jump roomdownscreen6
+label sofianeutmood6:
+    if ghost == True:
+        scene neutmood_sbad_gh
+        with slowfade
+        s "I see you're doing fine, today!"
+        scene roomd_ghosts
+        with slowfade
+        $ renpy.pause(1)
+        jump roomdownscreen6
+    if ghost == False:
+        scene neutmood_sneut_ev
+        with slowfade
+        s "a"
+        scene roomd_ev
+        with slowfade
+        $ renpy.pause(1)
+        jump roomdownscreen6
+label sofianeut6:
+    scene smood_sbad_gh
+    with slowfade
+    $ sofiatalk = True
+    """
+    You calmly sit at your desk.
+
+    The computer is already turned on, as always.
+
+    Sofia is still there.
+
+    She hasn't abandoned you and waits smiling, gently.
+    """
+    s ""
+    if mood >= 55:
+        scene roomd_ghosts
+        with slowfade
+        $ renpy.pause(1)
+        jump roomdownscreen6
+    if mood <= 45:
+        scene roomd_ghosts
+        with slowfade
+        $ renpy.pause(1)
+        jump roomdownscreen6
+
+
+label door6:
+    if mood >= 29 and mood <= 69:
+        "I can't get outside, it's tightly closed."
+        jump roomdownscreen6
+    if mood <= 30:
+        scene trauma
+        with slowfade
+        $ trauma += 1
+        """
+        trauma
+        """
+    elif mood >= 70:
+        scene mem
+        with slowfade
+        $ mem += 1
+        """
+        memory
+        """
     show black
     with fadehold
     stop music fadeout (3)
