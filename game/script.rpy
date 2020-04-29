@@ -2598,6 +2598,8 @@ label books4:
                     """
                 if letter == True:
                     $ truth == True
+                    $ mood += 5
+                    $ books = True
                     """
                     The words of the man in your memories come to your mind.
 
@@ -2682,9 +2684,11 @@ label books4:
 
                     'They are all beside me.'
 
-                    ''
+                    'Loneliness fades away.'
                     """
                 if letter == True:
+                    $ mood += 5
+                    $ books = True
                     $ truth == True
                     """
                     The words of the man in your memories come to your mind.
@@ -2748,88 +2752,161 @@ label books4:
 label plant4:
     if sofiatalk == False:
         """
-        You still wonder which flowers will grow.
+        Even the plant now seems sadder in this darkness.
 
-        And as you look at the plant, you feel some kind of distant calling.
-
-        A soft voice that whispers your name, smiling.
-
-        Strangely, you turn towards the computer.
+        You feel bad only by looking at it.
+        """
+    if plant == True:
+        """
+        You wonder when it'll grow.
         """
     if sofiatalk == True and ghost == True:
-        $ mood -= 5
-        $ plant = True
+        """
+        There seems to be a lot of dust on it.
+
+        And that sensation of sadness doesn't seem to leave the plant.
+
+        Do you clean it?
+        """
+        menu:
+            "Yes.":
+                $ mood -= 5
+                $ plant = True
+                """
+                You have the impression that the dust on it remains on your hand.
+
+                And from it a strange sensation comes.
+
+                As if your whole body has become heavier.
+
+                A weight you can't sustain.
+                """
+            "Not now.":
+                "You look away, still with a bad feeling."
     if sofiatalk == True and ghost == False:
-        $ mood += 5
-        $ plant = True
+        """
+        It's strange...
+
+        There seems to be a lot of dust on it.
+
+        Do you clean it?
+        """
+        menu:
+            "Yes.":
+                $ mood += 5
+                $ plant = True
+                """
+                Now it shines, a bright green as usual.
+                """
+            "Not now.":
+                "Maybe later."
     jump roomdownscreen4
 label trash4:
     if sofiatalk == False:
         """
-        Just a normal trash bin.
+        Even in this darkness...
 
-        Even though everything looks sadder...
-
-        There's still nothing special about it.
+        The trashbin remains a normal trashbin.
         """
+    if trash == True:
+        "You feel better now that it's empty."
     if sofiatalk == True and ghost == True:
-        $ mood -= 5
-        $ trash = True
+        """
+        Even in this darkness...
+
+        The trashbin remains a normal trashbin.
+        """
     if sofiatalk == True and ghost == False:
-        $ mood += 5
-        $ trash = True
+        """
+        Looking closely...
+
+        You still have to toss the trash.
+        """
+        menu:
+            "Toss it.":
+                $ mood += 5
+                $ trash = True
+                "You toss it right away."
+            "Not now.":
+                "Maybe another time."
     jump roomdownscreen4
 label phone4:
-    """
-    Maybe you could call someone...
+    if ghost == True:
+        """
+        You want to call someone.
 
-    But there really isn't anyone to call.
-    """
+        But you don't remember any phone number.
+
+        You're left almost completely alone.
+        """
+    if ghost == False:
+        """
+        You wonder...
+
+        What if you toss this phone away?
+
+        After all, there's never anyone to call.
+        """
     jump roomdownscreen4
 label tv4:
-    """
-    There's a strange danish tv series...
+    if ghost == True:
+        """
+        Only a black mirror.
+        """
+    if ghost == False:
+        """
+        You don't now how, but the tv is now on.
 
-    It's entirely set in a hospital.
+        On the screen there is a silent scene.
 
-    An old man is now on the hospital's roof.
+        A boy and a girl are watching the sea, without talking.
 
-    He screams about how much he hates Denmark.
-    """
+        It seems peaceful.
+        """
     jump roomdownscreen4
 label cds4:
-    """
-    You look closely at it.
+    if ghost == True:
+        """
+        The usual pile of CDs.
+        """
+    if ghost == False:
+        """
+        You look at all the CDs' titles.
 
-    There are a lot of albums of a band named...'Tool'.
-
-    Interesting.
-    """
+        But none attracts you.
+        """
     jump roomdownscreen4
 label toy4:
-    """
-    You're starting to accept it.
+    if ghost == True:
+        """
+        Only bad memories come from it.
 
-    After all, it's a nice teddy bear.
-    """
+        You wish it wasn't here.
+        """
+    if ghost == False:
+        """
+        Everytime you watch it, now, it makes you smile.
+        """
     jump roomupscreen4
 label mirror4:
-    """
-    You keep looking at it.
-
-    Yet there's only you.
-
-    Is the view so pleasant?
-    """
+    if ghost == True:
+        """
+        Are you looking at yourself?
+        """
+    if ghost == False:
+        """
+        Same dear you.
+        """
     jump roomupscreen4
 label guit4:
-    """
-    An old classic guitar.
-
-    If you close your eyes and listen to the silence...
-
-    You can faintly hear some chords playing in the wind.
-    """
+    if ghost == True:
+        """
+        It's silent.
+        """
+    if ghost == False:
+        """
+        Sometimes you'd like to remember how to play it.
+        """
     jump roomupscreen4
 
 label computer4:
