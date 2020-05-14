@@ -2,9 +2,11 @@
 errors listed below, and try again.
 
 
-The label sofianeut4 is defined twice, at
-  File "game/script.rpy", line 2711 and
-  File "game/script.rpy", line 3426.
+File "game/script.rpy", line 3013: expected statement.
+(Perhaps you left out a " at the end of the first line.)
+    s """
+    
+                """
 
 Ren'Py Version: Ren'Py 7.2.2.491
-Wed Apr 29 19:25:42 2020
+Sat May 02 14:10:17 2020

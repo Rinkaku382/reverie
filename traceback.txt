@@ -1,22 +1,22 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/script.rpy", line 230, in script
-    y "Help?"
-Exception: Sayer 'y' is not defined.
+  File "game/script.rpy", line 2472, in script
+    jump roomupscreen4g
+ScriptError: could not find label 'roomupscreen4g'.
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 230, in script
-    y "Help?"
-  File "D:\Games\Programmazione giochi\renpy-7.2.2-sdk\renpy\ast.py", line 664, in execute
-    who = eval_who(self.who, self.who_fast)
-  File "D:\Games\Programmazione giochi\renpy-7.2.2-sdk\renpy\ast.py", line 564, in eval_who
-    raise Exception("Sayer '%s' is not defined." % who.encode("utf-8"))
-Exception: Sayer 'y' is not defined.
+  File "game/script.rpy", line 2472, in script
+    jump roomupscreen4g
+  File "D:\Games\Programmazione giochi\renpy-7.2.2-sdk\renpy\ast.py", line 1678, in execute
+    rv = renpy.game.script.lookup(target)
+  File "D:\Games\Programmazione giochi\renpy-7.2.2-sdk\renpy\script.py", line 886, in lookup
+    raise ScriptError("could not find label '%s'." % str(original))
+ScriptError: could not find label 'roomupscreen4g'.
 
 Windows-8-6.2.9200
 Ren'Py 7.2.2.491
 Reverie 
-Thu Apr 23 23:36:22 2020
+Fri May 08 08:11:25 2020

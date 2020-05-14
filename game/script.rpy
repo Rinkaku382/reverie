@@ -2,6 +2,7 @@
 define slowerfade = Fade (3.0, 0, 3.0)
 define slowdissolve = Dissolve(1.0)
 define fadehold = Fade(3.0, 1.0, 3.0)
+define config.hard_rollback_limit = 0
 
 define s = Character("Sofia", color="#C69AF9")
 define ug = Character("Unknown Girl", color="#C69AF9")
@@ -453,7 +454,7 @@ label door:
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################START PASSAGE 2 #####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
 
 label narrator2:
-    show black
+    show narrator
     with fadehold
     """
     Memories.
@@ -1226,7 +1227,7 @@ label door2:
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################START PASSAGE 3 #####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
 
 label narrator3:
-    show black
+    show narrator
     with fadehold
     """
     You're now ready to go back to your room, aren't you?
@@ -2373,7 +2374,7 @@ label door3:
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################START PASSAGE 4 #####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
 
 label narrator4:
-    show black
+    show narrator
     with fadehold
     """
     And here you are, again.
@@ -2427,7 +2428,7 @@ label narrator4:
     play music "roombgm.ogg" fadein (3)
     scene roomd_ghosts
     with fadehold
-    $ mood = 45
+    $ mood = 50
     $ menth = 5
     $ sofiatalk = False
     $ windowseen = False
@@ -2469,7 +2470,7 @@ label roomup4:
         scene roomu_ghosts
         with fade
         $ renpy.pause(1)
-        jump roomupscreen4g
+        jump roomupscreen4
     if ghost == False:
         scene roomd_ev
         $ renpy.pause(0.5)
@@ -2895,7 +2896,7 @@ label mirror4:
         """
     if ghost == False:
         """
-        Same dear you.
+        Same old you.
         """
     jump roomupscreen4
 label guit4:
@@ -2922,7 +2923,7 @@ label sofiagood4:
     if ghost == True:
         scene gmood_sbad_gh
         with slowfade
-        s "I see you're doing fine, today!"
+        s "You seem to be happy...despite all, I guess."
         scene roomd_ghosts
         with slowfade
         $ renpy.pause(1)
@@ -2930,7 +2931,7 @@ label sofiagood4:
     if ghost == False:
         scene gmood_sgood_ev
         with slowfade
-        s "a"
+        s "Is that a smile I'm seeing?"
         scene roomd_ev
         with slowfade
         $ renpy.pause(1)
@@ -2939,7 +2940,7 @@ label sofiasad4:
     if ghost == True:
         scene smood_sbad_gh
         with slowfade
-        s "I see you're doing fine, today!"
+        s "Uhmm, maybe you should rest for a while...?"
         scene roomd_ghosts
         with slowfade
         $ renpy.pause(1)
@@ -2947,7 +2948,7 @@ label sofiasad4:
     if ghost == False:
         scene smood_sbad_ev
         with slowfade
-        s "a"
+        s "It seems you're feeling very bad..."
         scene roomd_ev
         with slowfade
         $ renpy.pause(1)
@@ -2956,7 +2957,7 @@ label sofianeutmood4:
     if ghost == True:
         scene neutmood_sbad_gh
         with slowfade
-        s "I see you're doing fine, today!"
+        s "I think you should rest..."
         scene roomd_ghosts
         with slowfade
         $ renpy.pause(1)
@@ -2964,25 +2965,55 @@ label sofianeutmood4:
     if ghost == False:
         scene neutmood_sneut_ev
         with slowfade
-        s "a"
+        s """
+        It seems like you're a little down.
+
+        Come on, there are lots of things you can do in there!
+        """
         scene roomd_ev
         with slowfade
         $ renpy.pause(1)
         jump roomdownscreen4
 label sofianeut4:
-    scene smood_sbad_gh
+    scene neutmood_sneut_gh
     with slowfade
     $ sofiatalk = True
-    """
-    You calmly sit at your desk.
+    s "Welcome back!"
+    menu:
+        "What is happening?":
+            s """
+            Uhmm, what do you mean?
 
-    The computer is already turned on, as always.
+            What should be happening?
+            """
+            menu:
+                "It's all dark in here...":
+                    $ mood -= 5
+                    s """
+                    Dark...?
 
-    Sofia is still there.
+                    It all seems normal to me.
 
-    She hasn't abandoned you and waits smiling, gently.
-    """
-    s "Welcome back again."
+                    But I guess you're not lying...
+
+                    Why should you, after all...?
+                    """
+                "You really can't see it?":
+                    $ mood += 5
+                    s """
+                    Uhm no, I'm sorry...
+
+                    But really, what's wrong?
+                    """
+                    menu:
+                        "The entire apartment is...strange. Darker.":
+                            s """
+                            That's very strange...it appears completely normal to me.
+                            """
+        "Why are you so happy?":
+            s """
+            aaa
+            """
     if mood >= 55:
         scene roomd_ghosts
         with slowfade
@@ -3017,7 +3048,7 @@ label door4:
 
 ####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################START PASSAGE 5 #####################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
 label narrator5:
-    show black
+    show narrator
     with fadehold
     """
     aaa
